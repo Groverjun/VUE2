@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<ha></ha>
+		</div>
+		
+	</body>
+	<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		let ha={
+			
+				template:"<h1>·VUE组件</h1>"
+			
+		}
+		new Vue({
+			el:"#box",
+			data:{
+				msg:"今天好冷"
+			},
+			components:{
+				ha
+			}
+		})
+	</script>
+</html>

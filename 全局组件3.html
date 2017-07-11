@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<min></min>			
+		</div>
+		<template id="list">
+			<h1>
+				<ul>
+					<li v-for="i in arr">{{i}}</li>
+				</ul>
+			</h1>
+		</template>
+	</body>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		Vue.component('min',{
+			template:`#list`,
+			data(){
+				return{
+					arr:[1,2,3]
+				}
+			},
+			methods:{
+				
+			}
+		})
+		
+		let app=new Vue({
+			el:"#app",
+			data:{
+				
+			},
+			components:{
+				'lele':{
+					template:'<h1>没钱啦</h1>'
+				}
+			}
+			
+		})
+		
+	</script>
+</html>

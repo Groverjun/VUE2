@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<input type="button" @keydown="show($event)" />
+			<input type="button" @keydown="show1.enter()" />
+		</div>
+	</body>
+	<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		let app=new Vue({
+			el:"#box",
+			data:{
+				
+			},
+			methods:{
+				show(ev){
+					console.log(ev)
+					if(ev.keyCode==13){
+						alert(111)
+					}
+				},
+				show1(){
+					
+						alert(111)
+					
+				}
+			}
+		})
+	</script>
+</html>

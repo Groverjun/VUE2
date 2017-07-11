@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<hehe></hehe>
+			<lala></lala>
+		</div>
+		<script type="x-template" id="oA">
+			<div @click="fa">oA:{{msg}}</div>
+		</script>
+		<script type="x-template" id="oB">
+			<div>oB:{{msg}}</div>
+		</script>
+	</body>
+	<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		let vm=new Vue()
+		Vue.component("hehe",{
+			template:"#oA",
+			data(){
+				return {
+					msg:"oA"
+				}
+			},
+			methods:{
+				fa(){
+					vm.$emit("oaa",this.msg)
+				}
+			}
+		})
+		Vue.component("lala",{
+			template:"#oB",
+			data(){
+				return {
+					msg:"oB"
+				}
+			},
+			mounted(){
+				vm.$on('oaa',(msg)=>{
+					this.msg=msg
+				})
+			}
+		})
+		
+		new Vue({
+			el:"#box",
+			data:{
+				msg:"父组件"
+			}
+		})
+	</script>
+</html>

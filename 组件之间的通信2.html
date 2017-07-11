@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			{{msg}}<haha :aaa="msg"></haha>
+		</div>
+		<script type="x-template" id="list">
+			<div @click="ok()">
+				{{aaa}}
+			</div>
+		</script>
+	</body>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		Vue.component(`haha`,{
+			template:"#list",
+			props:['aaa'],
+			methods:{
+				ok(){
+				    this.aaa="kkk"
+					this.$emit('ok',this.aaa)
+				}
+			}
+		})
+		let app=new Vue({
+			el:"#box",
+			data:{
+				msg:"认真你就输啦！"
+			},
+			
+			methods:{
+				
+			},
+			listen(aaa){
+				this.msg=aaa
+				console.log(aaa)
+				
+			}
+			
+		})
+	</script>
+</html>

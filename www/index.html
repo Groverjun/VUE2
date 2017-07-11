@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="fenye.css" />
+		<style type="text/css">
+			th {
+				text-align: center;
+			}
+			
+			table {
+				margin-top: 20px;
+			}
+		</style>
+	</head>
+	<script src="vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="vue-pagination.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div class="container" id="app">
+			<div class="form-group">
+				<label for="name">用户名</label>
+				<input type="text" class="form-control" id="name" v-model="name">
+			</div>
+			<div class="form-group">
+				<label for="age">年龄</label>
+				<input type="number" class="form-control" id="age" v-model="age">
+			</div>
+			<div class="form-gloup text-center">
+				<button class="btn btn-primary" v-on:click="add">添加</button>
+				<button class="btn btn-danger">全部 删除</button>
+			</div>
+			<table class="table table-bordered">
+				<tr>
+					<th>ID</th>
+					<th>用户名</th>
+					<th>年龄</th>
+					<th>操作</th>
+				</tr>
+				<tr v-for="(i,index) in arr">
+					<th>{{index+1}}</th>
+					<th>{{i.name}}</th>
+					<th>{{i.age}}</th>
+					<th><button class="btn btn-success" @click="det(i.id,index)">删除</button></th>
+				</tr>
+			</table>
+			<div id="abt">
+				<vue-pager :currentpage.sync="currentpage" :totlepage.sync="totlepage" :visiblepage.sync="visiblepage" v-on:page-change="listen"></vue-pager>
+				<p>{{msg}}</p>
+			</div>
+		</div>
+	</body>
+	<script>
+		let vm = new Vue({
+			el: '#app',
+			data: {
+				name: '',
+				age: '',
+				currentpage: 1,
+				totlepage: 10,
+				visiblepage: 5,
+				msg: '',
+				arr: [
+
+				]
+			},			
+			components: {
+				'vue-pager': vuePager //子组件
+			},
+			mounted() { //Vue挂在完毕  自己去执行
+				this.getData();
+				$.ajax({
+					url:'/zong'
+				}).then((res)=>{
+					console.log(res.length)
+						this.totlepage=Math.floor(res.length/5+1)
+				})
+			},
+			methods: {
+				/*增加一条数据*/
+				add() {
+					$.ajax({
+						url: '/add',
+						data: {
+							name: this.name,
+							age: this.age,
+							index:this.currentpage
+						}
+					}).then((res) => {
+						if(res.err) {
+							alert(res.msg);
+						} else {
+
+							this.name = '';
+							this.age = '';
+							$.ajax({
+								url:'/zong'
+							}).then((res)=>{
+								console.log(res.length)
+									this.totlepage=Math.floor(res.length/5+1)
+							})
+
+						}
+					}, (err) => {
+						alert('请求失败')
+					})
+				},
+				/*获取数据*/
+				getData() {
+					$.ajax({
+						url: '/getData'
+					}).then((res) => {
+						this.arr = res						
+						console.log(res.length)
+						
+					}, (err) => {
+						alert(`请求数据失败!`);
+					})
+				},
+				/*删除一条*/
+				det(n, index) {
+					$.ajax({
+						url: '/det',
+						data: {
+							n
+						}
+					}).then((res) => {
+						if(!res.err) {
+							this.arr.splice(index, 1)
+							$.ajax({
+								url:'/zong'
+							}).then((res)=>{
+								console.log(res.length)
+									this.totlepage=Math.floor(res.length/5+1)
+							})
+						} else {
+							alert(res.msg)
+						}
+					}, (err) => {
+						alert(`删除失败`)
+					})
+
+				},
+				listen: function(page) {
+					this.msg = '你点击了' + page + '页'
+					this.currentpage=page
+					$.ajax({						
+						url:"/fenye",
+						data:{
+							index:page
+						}
+					}).then((res)=>{
+						this.arr=res
+					},(err)=>{
+						console.log()
+					});
+				}
+			}
+
+		})
+	</script>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<input type="button"value="按钮" @click="get"/>
+			{{m}}
+		</div>
+	</body>
+	<script src="js/axios.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		let vm=new Vue({
+			el:"#box",
+			data:{
+				m:""
+			},
+			methods:{
+				get(){
+					axios.get('data/1.txt',{
+						params:{
+							
+						}
+					}).then((res)=>{
+						this.m=res.data
+					},(err)=>{
+						alert("错了")
+					})
+
+				}
+			}
+			
+		})
+	</script>
+</html>

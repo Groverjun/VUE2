@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<min></min>
+			
+		</div>
+	</body>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		Vue.component('min',{
+			template:`<h1 @click="ok">看看{{msy}}</h1>`,
+			data(){
+				return{
+					msy:`赶紧挣钱吧`
+				}
+			},
+			methods:{
+				ok(){
+					this.msg=`面包总会有的`
+				}
+			}
+		})
+		
+		let app=new Vue({
+			el:"#app",
+			data:{
+				
+			},
+			components:{
+				'lele':{
+					template:'<h1>没钱啦</h1>'
+				}
+			}
+			
+		})
+		
+	</script>
+</html>

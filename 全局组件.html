@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<min></min>
+			<lala></lala>
+			<lele></lele>
+		</div>
+	</body>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		Vue.component('min',{
+			template:`<h1>看看</h1>`
+		})
+		Vue.component(`lala`,{
+			template:`<h1>没钱啦</h1>`
+		})
+		let app=new Vue({
+			el:"#app",
+			data:{
+				
+			},
+			components:{
+				'lele':{
+					template:'<h1>没钱啦</h1>'
+				}
+			}
+			
+		})
+		
+	</script>
+</html>

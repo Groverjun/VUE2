@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<style type="text/css">
+			th{
+				text-align: center;
+			}
+			table{margin-top: 20px;}
+		</style>
+	</head>
+	<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	
+	<body>
+		<div class="container" id="box">
+		  <div class="form-group">
+		    <label for="name" >用户名</label>
+		    <input type="text" class="form-control" id="name" v-model="name" >
+		  </div>
+		  <div class="form-group">
+		    <label for="age">年龄</label>
+		    <input type="number" class="form-control" id="age" v-model="age">
+		  </div>
+		  <div class="form-gloup text-center">
+		  	<button class="btn btn-primary"v-on:click="add">添加</button>
+		  	<button class="btn btn-danger" v-on:click="allremove">全部 删除</button>
+		  </div>
+		<table class="table table-bordered">
+			<tr>
+				<th>ID</th>
+				<th>用户名</th>
+				<th>年龄</th>
+				<th>操作</th>
+			</tr>
+			<tr v-for="(i,index) in arr">
+				<th>{{index+1}}</th>
+				<th>{{i.name}}</th>
+				<th>{{i.age}}</th>
+				<th><button class="btn btn-success" @click="remove(index)">删除</button></th>
+			</tr>
+		</table>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		let app=new Vue({
+			el:"#box",
+			data:{			
+				name:"",
+				age:"",
+				arr:[{"name":"张三","age":20}]
+			},
+			methods:{				
+				add:function(){
+					this.arr.push({name:this.name,age:this.age})
+					this.name=""
+					this.age=""
+				},
+				remove:function(index){
+					 this.arr.splice(index,1);  
+				},
+				allremove:function(){
+					this.arr=[]
+				},
+			}
+		})
+
+	</script>
+</html>

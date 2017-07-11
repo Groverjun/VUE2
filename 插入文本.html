@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<div v-text="txt"></div>
+			<div v-html="txt1"></div>
+		</div>
+	</body>
+	<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		let app=new Vue({
+			el:"#box",
+			data:{
+				txt:"ashjkaskkka",
+				txt1:"<h1>bsjjlds</h1>"
+			},
+			methods:{
+				
+			}
+		})
+	</script>
+</html>

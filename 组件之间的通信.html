@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			<!--父组件有msg的属性，子组件要想用msg
+				1.在子组件中定义一个属性
+				2.把msg作为参数传进去
+			-->
+			<haha :aaa="msg"></haha>
+		</div>
+		<script type="x-template" id="list">
+			<div>
+				{{aaa}}
+			</div>
+		</script>
+	</body>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		Vue.component(`haha`,{
+			template:"#list",
+			props:['aaa']
+		})
+		let app=new Vue({
+			el:"#box",
+			data:{
+				msg:"认真你就输啦！"
+			}
+		})
+	</script>
+</html>

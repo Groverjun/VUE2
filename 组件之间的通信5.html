@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="box">
+			{{msg}}<haha :aaa="msg"></haha>
+		</div>
+		<script type="x-template" id="tul">
+			<div><h1 @click="ok(aaa)">{{aaa}}</h1></div>
+		</script>
+	</body>
+	<script src="js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		Vue.component("haha",{
+			template:"#tul",
+			data(){
+				return{
+					msg:"zi"
+				}
+			},			
+			props:["aaa"],//接受父元素的变量
+			methods:{
+				ok(aaa){
+					console.log(aaa)
+				}
+			}
+			
+		})
+		new Vue({
+			el:"#box",
+			data:{
+				msg:"今天好冷"
+			},
+			methods:{
+				
+			}
+		})
+	</script>
+</html>
