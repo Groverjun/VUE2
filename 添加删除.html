@@ -53,15 +53,15 @@
 			data:{			
 				name:"",
 				age:"",
-				allchec1:true,				
-				arr:[{chec:true,"name":"张三","age":20}]				
+				allchec1:false,				
+				arr:[{chec:false,"name":"张三","age":20}]
+
 			},
 			methods:{				
 				add:function(){
-					this.arr.push({chec:true,name:this.name,age:this.age})
+					this.arr.push({chec:false,name:this.name,age:this.age})
 					this.name=""
 					this.age=""
-					console.log(this.arr)
 				},
 				remove:function(index){
 					 this.arr.splice(index,1);  
@@ -69,20 +69,25 @@
 				allremove:function(){
 					this.arr=[]
 				},
-				pitch:function(){
+				pitch:function(){					
+					 for (var i = this.arr.length - 1;i >= 0;i--) {
+	                     var index = this.arr[i];
+	                     if (index.chec) {
+	                         this.arr.splice(i,1);
+	                     }
+	                 }
 					
 				},
 				allSelect(i) {					
 					this.arr.forEach(i => {
-						i.chec = this.allchec1
+						i.chec = this.allchec1						
 					})					
 				},
 				singleSelect() {
 					var vm = this;
 					var selectData = vm.arr.filter(i => {
 						return i.chec == true
-					})
-		
+					})		
 					selectData.length == vm.arr.length ? vm.allchec1 = true : vm.allchec1 = false;
 				}
 			}
